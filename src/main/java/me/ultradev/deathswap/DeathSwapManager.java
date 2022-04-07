@@ -55,7 +55,7 @@ public class DeathSwapManager {
                for(int i = 0; i < 100; i++) {
                    if(!playerLocation.getBlock().getType().equals(Material.AIR)) {
                        playerLocation.add(0, 1, 0);
-                   }
+                   } else break;
                }
 
                 locations.add(playerLocation);
