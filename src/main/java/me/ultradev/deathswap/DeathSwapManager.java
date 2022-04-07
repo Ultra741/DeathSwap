@@ -38,10 +38,10 @@ public class DeathSwapManager {
                         0,
                         NumberUtil.getRandomBetween(-100000, 100000));
 
-               playerLocation.setY(player.getWorld().getHighestBlockYAt(playerLocation) + 1);
+                playerLocation.setY(player.getWorld().getHighestBlockYAt(playerLocation) + 1);
 
-               for(int i = 0; i < 100; i++) {
-                   for(Location checkLocation : locations) {
+                for(int i = 0; i < 100; i++) {
+                    for(Location checkLocation : locations) {
                         if(checkLocation.distance(playerLocation) < 5000) {
                             playerLocation = new Location(player.getWorld(),
                                     NumberUtil.getRandomBetween(-100000, 100000),
@@ -49,14 +49,14 @@ public class DeathSwapManager {
                                     NumberUtil.getRandomBetween(-100000, 100000));
                             playerLocation.setY(player.getWorld().getHighestBlockYAt(playerLocation) + 1);
                         }
-                   }
-               }
+                    }
+                }
 
-               for(int i = 0; i < 100; i++) {
-                   if(!playerLocation.getBlock().getType().equals(Material.AIR)) {
-                       playerLocation.add(0, 1, 0);
-                   } else break;
-               }
+                for(int i = 0; i < 100; i++) {
+                    if(!playerLocation.getBlock().getType().equals(Material.AIR)) {
+                        playerLocation.add(0, 1, 0);
+                    } else break;
+                }
 
                 locations.add(playerLocation);
                 player.teleport(playerLocation);
