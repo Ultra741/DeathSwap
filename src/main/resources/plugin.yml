@@ -1,7 +1,7 @@
 name: DeathSwap
 version: '${version}'
 main: me.ultradev.deathswap.Main
-api-version: 1.18
+api-version: 1.16
 commands:
   ds-start:
     permission: deathswap.commands.ds-start

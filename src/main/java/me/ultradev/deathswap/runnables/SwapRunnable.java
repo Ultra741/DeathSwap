@@ -15,7 +15,7 @@ import java.util.List;
 public class SwapRunnable extends BukkitRunnable {
 
     int timer = 0;
-    int swapDuration = NumberUtil.getRandomBetween(60, 180);
+    int swapDuration = NumberUtil.getRandomBetween(180, 300);
 
     @Override
     public void run() {
@@ -29,10 +29,10 @@ public class SwapRunnable extends BukkitRunnable {
         if(timer >= swapDuration) {
 
             timer = 0;
-            swapDuration = NumberUtil.getRandomBetween(60, 180);
+            swapDuration = NumberUtil.getRandomBetween(180, 300);
 
             new BukkitRunnable() {
-                int untilSwap = 5;
+                int untilSwap = 10;
                 @Override
                 public void run() {
                     for(Player player : Bukkit.getOnlinePlayers()) {
@@ -75,7 +75,9 @@ public class SwapRunnable extends BukkitRunnable {
                     player.sendMessage(Main.toColor("&aYou swapped with " + swaps.get(player).getName() + "!"));
                 }
 
-            }, 100);
+                DeathSwapManager.totalSwaps++;
+
+            }, 200);
 
         }
 

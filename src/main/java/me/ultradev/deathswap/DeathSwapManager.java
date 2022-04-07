@@ -2,6 +2,9 @@ package me.ultradev.deathswap;
 
 import me.ultradev.deathswap.api.util.NumberUtil;
 import me.ultradev.deathswap.runnables.SwapRunnable;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -15,12 +18,14 @@ public class DeathSwapManager {
 
     public static boolean gameActive = false;
     public static List<Player> players = new ArrayList<>();
+    public static int totalSwaps = 0;
 
     public static void startGame() {
 
         Bukkit.broadcastMessage(Main.toColor("&aA game of DeathSwap is starting in 5 seconds!"));
         gameActive = true;
         players.clear();
+        totalSwaps = 0;
         for(Player player : Bukkit.getOnlinePlayers()) {
             if(player.hasPermission("deathswap.participate")) players.add(player);
         }
@@ -87,11 +92,19 @@ public class DeathSwapManager {
             gameActive = false;
             players.clear();
 
+            TextComponent info = new TextComponent(Main.toColor("&eThe game has ended! "));
+            TextComponent hover = new TextComponent(Main.toColor("&8[&a&lHOVER FOR INFO&8]"));
+            hover.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(
+                    Main.toColor("&eDeathSwap Game Stats\n\n&7Total swaps: &e" + totalSwaps))));
+
             for(Player player : Bukkit.getOnlinePlayers()) {
                 if(player.hasPermission("deathswap.participate")) {
                     player.teleport(player.getWorld().getSpawnLocation());
+                    player.spigot().sendMessage(info, hover);
                 }
             }
+
+            totalSwaps = 0;
 
         }
 
